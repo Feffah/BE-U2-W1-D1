@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BE_U2_W1_D1.Controllers
 {
-    public class UserController : Controller
+    public class BookController : Controller
     {
         private readonly ProductService _productService;
 
-        public UserController(ProductService productService)
+        public BookController(ProductService productService)
         {
             _productService = productService;
         }
@@ -53,6 +53,7 @@ namespace BE_U2_W1_D1.Controllers
 
             productFromDb.Titolo = product.Titolo;
             productFromDb.Autore = product.Autore;
+            productFromDb.Trama = product.Trama;
             productFromDb.Prezzo = product.Prezzo;
             productFromDb.Copertina = product.Copertina;
 

@@ -3,14 +3,23 @@
 }
 
 <h1 class="text-white">Catalogo Libri</h1>
+<div class="row">
 @foreach (var book in Model)
 {
-    <div class="card bg-dark text-white mb-3" style="width: 18rem;">
+    <div class="card bg-dark text-white mx-3" style="width: 18rem;">
         <img class="card-img-top" src="@book.Copertina" alt="@book.Titolo">
         <div class="card-body">
             <h5 class="card-title">@book.Titolo</h5>
             <p class="card-text">Autore: @book.Autore</p>
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Trama
+                    </button>
+                    <ul class="dropdown-menu bg-secondary p-2 ">
+                        <p class="card-text text-white">@book.Trama</p>
+                    </ul>
+                </div>
             <p class="card-text">Prezzo: @book.Prezzo €</p>
         </div>
     </div>
-}
+}</div>

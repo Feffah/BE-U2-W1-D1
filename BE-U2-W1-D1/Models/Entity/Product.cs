@@ -11,6 +11,8 @@ namespace BE_U2_W1_D1.Models.Entity
         public string? Titolo { get; set; }
         public string? Autore { get; set; }
         [Precision(18, 2)]
+
+        public string Trama { get; set; }
         public decimal Prezzo { get; set; }
 
     }
