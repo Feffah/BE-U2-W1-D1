@@ -33,11 +33,33 @@ namespace BE_U2_W1_D1.Models.Services
 
         public bool Update(Product product)
         {
-            return false;
+            _context.Products.Update(product);
+            return _context.SaveChanges() > 0;
+        }
+
+
+        public Product GetId(Guid Id)
+        {
+            return _context.Products.FirstOrDefault(p => p.Id == Id);
         }
 
         public bool Delete(Guid Id)
         {
+            Product toDelete = this.GetId(Id);
+            if (toDelete != null)
+            {
+                this._context.Products.Remove(toDelete);
+                return this.Save();
+            }
+            return false;
+        }
+
+        public bool Save()
+        {
+            if (this._context.SaveChanges() > 0)
+            {
+                return true;
+            }
             return false;
         }
 

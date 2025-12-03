@@ -16,7 +16,8 @@ namespace BE_U2_W1_D1.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            var products = _productService.GetAll();
+            return View(products);
         }
 
         [HttpPost]
@@ -25,9 +26,48 @@ namespace BE_U2_W1_D1.Controllers
             product.Id = Guid.NewGuid();
             bool isCreated = _productService.Create(product);
 
+            return RedirectToAction("Index");
 
+        }
+
+        [HttpGet]
+        public IActionResult Update(Guid Id)
+        {
+            var product = _productService.GetId(Id);
+            if (product == null)
+                return NotFound();
             return View(product);
+        }
 
+        [HttpPost]
+        public IActionResult Update(Product product)
+        {
+            if (product.Id == Guid.Empty)
+                return BadRequest("ID non valido.");
+
+
+            var productFromDb = _productService.GetId(product.Id);
+            if (productFromDb == null)
+                return NotFound();
+
+
+            productFromDb.Titolo = product.Titolo;
+            productFromDb.Autore = product.Autore;
+            productFromDb.Prezzo = product.Prezzo;
+            productFromDb.Copertina = product.Copertina;
+
+
+
+            bool updated = _productService.Update(productFromDb);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Guid id)
+        {
+            bool result = _productService.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }
