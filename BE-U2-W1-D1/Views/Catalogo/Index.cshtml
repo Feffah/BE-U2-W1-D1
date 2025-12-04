@@ -1,12 +1,9 @@
-﻿@model List<BE_U2_W1_D1.Models.Entity.Product>
-@{
-}
-
-<h1 class="text-white">Catalogo Libri</h1>
+﻿
+<h1 class="text-black">Catalogo Libri</h1>
 <div class="row">
-@foreach (var book in Model)
+@foreach (var book in ViewBag.Products)
 {
-    <div class="card bg-dark text-white mx-3" style="width: 18rem;">
+    <div class="card bg-white text-black mx-3" style="width: 18rem;">
         <img class="card-img-top" src="@book.Copertina" alt="@book.Titolo">
         <div class="card-body">
             <h5 class="card-title">@book.Titolo</h5>
@@ -20,6 +17,18 @@
                     </ul>
                 </div>
             <p class="card-text">Prezzo: @book.Prezzo €</p>
+
+                <div class="dropdown mb-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Prestito
+                    </button>
+                    <ul id="dropdown" class="dropdown-menu bg-secondary p-2 ">
+                        @foreach(var user in ViewBag.Users)
+                        {
+                            <li>@user.Nome</li>
+                        }
+                    </ul>
+                </div>
         </div>
     </div>
 }</div>
